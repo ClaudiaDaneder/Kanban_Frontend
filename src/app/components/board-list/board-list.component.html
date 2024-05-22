@@ -1,0 +1,25 @@
+<section>
+
+    <h1>Board List</h1>
+
+    <div>
+        @for (board of boards; track board.id) {
+        <div>Title: {{ board.title }} </div>
+        <div>ID: {{ board.id }} </div>
+        <div>Owner: {{ board.owner }}</div>
+        }
+        <hr>
+    </div>
+
+
+    <div class="newBoard">
+        <hr>
+        <p>Create a new Board</p>
+        <form (ngSubmit)="createNewBoard()">
+            <div>
+              <label for="title">Title</label>
+              <input type="text" [(ngModel)]="title" name="title" required>
+            </div>
+            <button type="submit">Create Board</button>
+          </form>
+    </div>

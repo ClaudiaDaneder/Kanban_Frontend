@@ -1,0 +1,55 @@
+<section>
+
+    <h1>Board Details</h1>
+
+    <div class="board-content">
+    <div class="column">
+        <h3>To Do</h3>
+        <div class="task-container">
+            @for (task of tasks; track $index) {
+            @if (task.status == '1') {
+            <div><input type="checkbox" [checked]="task.done">
+                {{task.title}}</div>
+            }
+            }
+        </div>
+    </div>
+
+    <div class="column">
+        <h3>Do Today</h3>
+        <div class="task-container">
+            @for (task of tasks; track $index) {
+            @if (task.status == '2') {
+            <div><input type="checkbox" [checked]="task.done">
+                {{task.title}}</div>
+            }
+            }
+        </div>
+    </div>
+
+    <div class="column">
+        <h3>In Progress</h3>
+        <div class="task-container">
+            @for (task of tasks; track $index) {
+            @if (task.status == '3') {
+            <div><input type="checkbox" [checked]="task.done">
+                {{task.title}}</div>
+            }
+            }
+        </div>
+    </div>
+
+    <div class="column">
+        <h3>Done</h3>
+        <div class="task-container">
+            @for (task of tasks; track $index) {
+            @if (task.status == '4') {
+            <div><input type="checkbox" [checked]="task.done">
+                {{task.title}}</div>
+            }
+            }
+        </div>
+    </div>
+</div>
+
+</section>
