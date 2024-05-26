@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h4 class="modal-title">Create a new Task</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <div class="task-create">
+        <form #createTaskForm="ngForm">
+            <div>
+                <label for="title">Title</label>
+                <input id="title" [(ngModel)]="task.title" type="text" required>
+            </div>
+
+            <div>
+                <label for="description">Description</label>
+                <textarea id="description" [(ngModel)]="task.description" required></textarea>
+            </div>
+
+            <div>
+                <label for="board">Board</label>
+                <select id="board" [(ngModel)]="task.board" required>
+                    <option *ngFor="let board of boards" [value]="board.id">{{ board.title }}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="users">Assigned to</label>
+                <select id="users" [(ngModel)]="task.project_lead" required>
+                    <option *ngFor="let user of users" [value]="user.id">{{ user.first_name }} {{ user.last_name }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="status">Status</label>
+                <select id="status" [(ngModel)]="task.status" required>
+                    <option value="1">To Do</option>
+                    <option value="2">Do Today</option>
+                    <option value="3">In Progress</option>
+                    <option value="4">Done</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="priority">Priority</label>
+                <select id="priority" [(ngModel)]="task.priority" required>
+                    <option value="1">Low</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Urgent</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="deadline">Deadline</label>
+                <input id="deadline" [(ngModel)]="task.deadline" type="date" required>
+            </div>
+
+            <button type="submit" (click)="createTask(); createTaskForm.reset()">Create Task</button>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

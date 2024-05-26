@@ -1,0 +1,15 @@
+<nav class="navbar dFlex-SB">
+  <a routerLink="dashboard" class="navbar-logo"><img src="assets/img/logo.png" alt="My App Logo" />smartY</a>
+  <div class="navbar-links">
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/boards">My Boards</a>
+  </div>
+  <div class="d-inline-block" ngbDropdown>
+    <a><img class="profile" src="assets/img/user.png" alt="Profile" ngbDropdownToggle id="dropdownBasic1"></a>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem>Action - 1</button>
+      <button ngbDropdownItem>Another Action</button>
+      <button ngbDropdownItem>Something else is here</button>
+    </div>
+  </div>
+</nav>

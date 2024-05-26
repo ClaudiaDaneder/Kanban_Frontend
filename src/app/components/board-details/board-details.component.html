@@ -1,55 +1,94 @@
-<section>
+<section *ngIf="board" class="p-32-64">
+
 
     <h1>Board Details</h1>
 
+
+    <h2>{{board.title}}</h2>
+
     <div class="board-content">
-    <div class="column">
-        <h3>To Do</h3>
-        <div class="task-container">
-            @for (task of tasks; track $index) {
-            @if (task.status == '1') {
-            <div><input type="checkbox" [checked]="task.done">
-                {{task.title}}</div>
-            }
-            }
+        <div class="column">
+            <div class="column-title dFlex-SB">
+                <h3>To Do</h3>
+                <button class="add-task-btn dFlex-C" (click)="openAddTaskModal(1)">+</button>
+            </div>
+            <div class="task-container dFlex-SB">
+                @for (task of tasks; track task.id) {
+                @if (task.status == '1') {
+                <div class="task-card" (click)="openTaskDetailModal(task.id)">
+                    <div class="dFlex-SB">
+                        <b>{{task.title}}</b>
+                        <div class="initials dFlex-C">
+                            {{task.project_lead.first_name[0]}}{{task.project_lead.last_name[0]}}</div>
+                    </div>
+                </div>
+                }
+                }
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="column-title dFlex-SB">
+                <h3>To Today</h3>
+                <button class="add-task-btn dFlex-C" (click)="openAddTaskModal(2)">+</button>
+            </div>
+            <div class="task-container">
+                @for (task of tasks; track $index) {
+                @if (task.status == '2') {
+                <div class="task-card">
+                    <div class="dFlex-SB">
+                        <b>{{task.title}}</b>
+                        <div class="initials dFlex-C">
+                            {{task.project_lead.first_name[0]}}{{task.project_lead.last_name[0]}}
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="column-title dFlex-SB">
+                <h3>In Progress</h3>
+                <button class="add-task-btn dFlex-C" (click)="openAddTaskModal(3)">+</button>
+            </div>
+            <div class="task-container">
+                @for (task of tasks; track $index) {
+                @if (task.status == '3') {
+                <div class="task-card">
+                    <div class="dFlex-SB">
+                        <b>{{task.title}}</b>
+                        <div class="initials dFlex-C">
+                            {{task.project_lead.first_name[0]}}{{task.project_lead.last_name[0]}}
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="column-title dFlex-SB">
+            <h3>Done</h3>
+            </div>
+            <div class="task-container">
+                @for (task of tasks; track $index) {
+                @if (task.status == '4') {
+                <div class="task-card">
+                    <div class="dFlex-SB">
+                        <b>{{task.title}}</b>
+                        <div class="initials dFlex-C">
+                            {{task.project_lead.first_name[0]}}{{task.project_lead.last_name[0]}}
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+            </div>
         </div>
     </div>
 
-    <div class="column">
-        <h3>Do Today</h3>
-        <div class="task-container">
-            @for (task of tasks; track $index) {
-            @if (task.status == '2') {
-            <div><input type="checkbox" [checked]="task.done">
-                {{task.title}}</div>
-            }
-            }
-        </div>
-    </div>
-
-    <div class="column">
-        <h3>In Progress</h3>
-        <div class="task-container">
-            @for (task of tasks; track $index) {
-            @if (task.status == '3') {
-            <div><input type="checkbox" [checked]="task.done">
-                {{task.title}}</div>
-            }
-            }
-        </div>
-    </div>
-
-    <div class="column">
-        <h3>Done</h3>
-        <div class="task-container">
-            @for (task of tasks; track $index) {
-            @if (task.status == '4') {
-            <div><input type="checkbox" [checked]="task.done">
-                {{task.title}}</div>
-            }
-            }
-        </div>
-    </div>
-</div>
 
 </section>

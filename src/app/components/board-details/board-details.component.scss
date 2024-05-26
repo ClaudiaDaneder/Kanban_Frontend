@@ -1,5 +1,6 @@
 section {
     max-width: 1440px;
+
 }
 
 .board-content {
@@ -21,6 +22,46 @@ section {
     width: 100%;
     border: 1px solid black;
     border-radius: 20px;
-    padding: 16px;
-    height: 100%
+    padding: 16px 6px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.task-card {
+    background-color: rgb(224, 237, 203);
+    border: 2px darkolivegreen solid;
+    border-radius: 10px;
+    padding: 6px;
+    font-size: 14px;
+    width: 100%
+}
+
+.initials {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    border-radius: 100%;
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.add-task-btn {
+    background-color: darkblue;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    border: 2px solid #fff;
+
+}
+
+.column-title {
+    width: 100%
 }

@@ -21,7 +21,7 @@ export class LoginComponent {
     try {
       let response:any = await this.auth.loginUserPassword(this.username, this.password);
       localStorage.setItem('token', response['token'])
-      this.router.navigateByUrl('boards')
+      this.router.navigateByUrl('dashboard')
     } catch(e) {
       alert('Login failed!');
     }

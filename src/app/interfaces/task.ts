@@ -1,11 +1,13 @@
 import { Board } from "./board";
 
 export interface Task {
+    id?: number;
     title: string;
     description: string;
-    status: string;
-    due_date: Date | null;
-    board: Board; // Verweis auf das zugehörige Board
+    status: number;
+    priority: number;
+    deadline: Date;
+    board: number;
+    project_lead: number;
     created_at: Date;
-    updated_at: Date;
 }
