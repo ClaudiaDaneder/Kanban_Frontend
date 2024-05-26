@@ -1,9 +1,8 @@
-import { Component, Input, inject, input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Task } from '../../../interfaces/task';
 import { TaskService } from '../../../services/task.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-details',
@@ -14,13 +13,22 @@ import { CommonModule } from '@angular/common';
 })
 export class TaskDetailsComponent {
   @Input() taskId!: number;
-  activeModal = inject(NgbActiveModal);
   task!: any;
+  activeModal = inject(NgbActiveModal);
 
   constructor(private ts: TaskService) {
-    this.ts.loadTaskDetails(this.taskId);
-    console.log(this.taskId);
-    
+    this.loadTaskDetails();
+  }
 
+  async loadTaskDetails() {
+    console.log(this.taskId);
+    console.log(this.task);
+    try {
+      this.task = await this.ts.loadTaskDetails(this.taskId);
+
+    } catch (e) {
+      console.log('An error occurred, please help me: ', e);
+
+    }
   }
 }
