@@ -1,6 +1,6 @@
 section {
     max-width: 1440px;
-
+    background-color: #F6F7F8 !important;
 }
 
 .board-content {
@@ -20,7 +20,7 @@ section {
 
 .task-container {
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid rgba(76, 72, 94, 0.778);
     border-radius: 20px;
     padding: 16px 6px;
     height: 100%;
@@ -30,24 +30,31 @@ section {
 }
 
 .task-card {
-    background-color: rgb(224, 237, 203);
-    border: 2px darkolivegreen solid;
+    background-color: #ffc620;
     border-radius: 10px;
     padding: 6px;
     font-size: 14px;
-    width: 100%
+    width: 100%;
+    color: darkblue;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #f1da95;
+    }
 }
 
 .initials {
-    width: 25px;
-    height: 25px;
+    width: 25px !important;
+    height: 25px !important;
     display: flex;
     border-radius: 100%;
-    border: 1px solid #000;
     background-color: #fff;
-    color: #000;
+    color: darkblue;
     font-weight: 600;
     font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .add-task-btn {
@@ -60,8 +67,45 @@ section {
     border-radius: 100%;
     border: 2px solid #fff;
 
+    img {
+        width: 12px;
+        height: 12px
+    }
+
 }
 
 .column-title {
     width: 100%
+}
+
+
+.settings-btn {
+    width: 25px;
+    height: 25px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+h2 {
+    position: relative;
+    margin-bottom: 20px;
+
+    &::after {
+        content: '';
+        border-bottom: 3px solid #ffc400;
+        width: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        animation: expandLine 0.3s ease-in-out forwards;
+        animation-delay: 0.3s; /* Zeitverzögerung vor der Animation */
+    }
+
+    @keyframes expandLine {
+        to {
+            width: 120px;
+        }
+    }
 }

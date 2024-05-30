@@ -1,0 +1,13 @@
+<div class="board-list">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title">{{ user ? user.first_name : 'User'}}'s Projects</h2>
+
+    <button type="button" class="btn-close text-reset" aria-label="Close"
+      (click)="activeOffcanvas.dismiss('Cross click')"></button>
+  </div>
+  <div class="offcanvas-body">
+    @for (board of boards; track board.id) {
+    <div class="board-links"><a [routerLink]="['boards', board.id, 'tasks']" (click)="activeOffcanvas.close()">{{ board.title }}</a></div>
+    }
+  </div>
+</div>

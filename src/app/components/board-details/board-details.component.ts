@@ -1,25 +1,33 @@
 import { Component, inject } from '@angular/core';
 import { TaskService } from '../../services/task.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddTaskToBoardComponent } from '../modals/add-task-to-board/add-task-to-board.component';
 import { TaskDetailsComponent } from '../modals/task-details/task-details.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-board-details',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, NgbDropdownModule, DragDropModule, FormsModule],
   templateUrl: './board-details.component.html',
   styleUrl: './board-details.component.scss'
 })
 export class BoardDetailsComponent {
   tasks: any = [];
   board: any;
+  isEditMode: boolean = false;
+  boardId!: number;
+
   private modalService = inject(NgbModal);
+  private ts = inject(TaskService);
+  private route = inject(ActivatedRoute)
+  private router = inject(Router)
 
 
-  constructor(private ts: TaskService, private route: ActivatedRoute) {
+  constructor() {
     this.renderBoardDetails();
   }
 
@@ -52,7 +60,7 @@ export class BoardDetailsComponent {
   }
 
   openAddTaskModal(status: number) {
-    let modalRef = this.modalService.open(AddTaskToBoardComponent);
+    let modalRef = this.modalService.open(AddTaskToBoardComponent, { centered: true });
     modalRef.componentInstance.task.status = status;
     modalRef.componentInstance.task.board = this.board.id;
     modalRef.componentInstance.newTaskAdded.subscribe(() => {
@@ -61,8 +69,36 @@ export class BoardDetailsComponent {
   }
 
   openTaskDetailModal(taskId: number) {
-    let modalRef = this.modalService.open(TaskDetailsComponent);
-    modalRef.componentInstance.taskId = taskId;
+    this.ts.taskId = taskId;
+    let modalRef = this.modalService.open(TaskDetailsComponent, { centered: true });
+    modalRef.componentInstance.taskUpdated.subscribe(() => {
+      this.loadTasks(this.board.id);
+    })
+  }
+
+  async deleteBoard(boardId: number) {
+    try {
+      await this.ts.deleteBoard(boardId);
+      this.router.navigateByUrl('dashboard');
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async updateBoard() {
+    try {
+      await this.ts.updateBoard(this.board.id, {
+        title: this.board.title,
+      });
+      this.isEditMode = false;
+    } catch (e) {
+      console.log('Halt, jetzt stopp!', e);
+
+    }
+  }
+
+  toggleEditMode() {
+    this.isEditMode = !this.isEditMode;
   }
 
 }

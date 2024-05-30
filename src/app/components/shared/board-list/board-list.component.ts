@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { TaskService } from '../../services/task.service';
+import { Component, Input, inject } from '@angular/core';
+import { TaskService } from '../../../services/task.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Board } from '../../interfaces/board';
+import { Board } from '../../../interfaces/board';
 import { RouterLink } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreateBoardComponent } from '../modals/create-board/create-board.component';
+import { NgbActiveOffcanvas, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateBoardComponent } from '../../modals/create-board/create-board.component';
+import { User } from '../../../interfaces/user';
 
 @Component({
   selector: 'app-board-list',
@@ -16,11 +17,12 @@ import { CreateBoardComponent } from '../modals/create-board/create-board.compon
 })
 export class BoardListComponent {
   boards: any = [];
-  private modalService = inject(NgbModal);
+  private ts = inject(TaskService);
+  activeOffcanvas = inject(NgbActiveOffcanvas);
+  @Input() user!: User;
 
-  constructor(private ts: TaskService) {
+  constructor() {
     this.renderBoards();
-
   }
 
   async renderBoards() {
@@ -30,9 +32,4 @@ export class BoardListComponent {
         console.log('Help!!', e);
       }
   }
-
-  open() {
-    this.modalService.open(CreateBoardComponent, { size: 'lg' });
-  }
-
 }

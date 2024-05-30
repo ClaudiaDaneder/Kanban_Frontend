@@ -1,16 +1,26 @@
 <section *ngIf="board" class="p-32-64">
 
+<div class="dFlex-SB">
+    <h2 *ngIf="!isEditMode">{{board.title}}</h2>
+    <form *ngIf="isEditMode">
+          <input type="text" [(ngModel)]="board.title" name="title">
+          <button type="submit" (click)="updateBoard()" class="btn btn-primary">save</button>
+    </form>
 
-    <h1>Board Details</h1>
+    <div ngbDropdown class="d-inline-block">
+           <img src="assets/img/settings.png" ngbDropdownToggle class="settings-btn">
+        <div ngbDropdownMenu>
+            <button ngbDropdownItem (click)="toggleEditMode()">Edit</button>
+            <button ngbDropdownItem (click)="deleteBoard(board.id)">Delete</button>
 
-
-    <h2>{{board.title}}</h2>
-
+        </div>
+    </div>
+</div>
     <div class="board-content">
         <div class="column">
             <div class="column-title dFlex-SB">
                 <h3>To Do</h3>
-                <button class="add-task-btn dFlex-C" (click)="openAddTaskModal(1)">+</button>
+                <button class="add-task-btn dFlex-C" (click)="openAddTaskModal(1)"><img src="assets/img/add.png"></button>
             </div>
             <div class="task-container dFlex-SB">
                 @for (task of tasks; track task.id) {
@@ -18,7 +28,7 @@
                 <div class="task-card" (click)="openTaskDetailModal(task.id)">
                     <div class="dFlex-SB">
                         <b>{{task.title}}</b>
-                        <div class="initials dFlex-C">
+                        <div class="initials">
                             {{task.project_lead.first_name[0]}}{{task.project_lead.last_name[0]}}</div>
                     </div>
                 </div>
@@ -29,16 +39,16 @@
 
         <div class="column">
             <div class="column-title dFlex-SB">
-                <h3>To Today</h3>
-                <button class="add-task-btn dFlex-C" (click)="openAddTaskModal(2)">+</button>
+                <h3>Do Today</h3>
+                <button class="add-task-btn dFlex-C" (click)="openAddTaskModal(2)"><img src="assets/img/add.png"></button>
             </div>
             <div class="task-container">
                 @for (task of tasks; track $index) {
                 @if (task.status == '2') {
-                <div class="task-card">
+                    <div class="task-card" (click)="openTaskDetailModal(task.id)">
                     <div class="dFlex-SB">
                         <b>{{task.title}}</b>
-                        <div class="initials dFlex-C">
+                        <div class="initials">
                             {{task.project_lead.first_name[0]}}{{task.project_lead.last_name[0]}}
                         </div>
                     </div>
@@ -51,15 +61,15 @@
         <div class="column">
             <div class="column-title dFlex-SB">
                 <h3>In Progress</h3>
-                <button class="add-task-btn dFlex-C" (click)="openAddTaskModal(3)">+</button>
+                <button class="add-task-btn dFlex-C" (click)="openAddTaskModal(3)"><img src="assets/img/add.png"></button>
             </div>
             <div class="task-container">
                 @for (task of tasks; track $index) {
                 @if (task.status == '3') {
-                <div class="task-card">
+                    <div class="task-card" (click)="openTaskDetailModal(task.id)">
                     <div class="dFlex-SB">
                         <b>{{task.title}}</b>
-                        <div class="initials dFlex-C">
+                        <div class="initials">
                             {{task.project_lead.first_name[0]}}{{task.project_lead.last_name[0]}}
                         </div>
                     </div>
@@ -76,10 +86,10 @@
             <div class="task-container">
                 @for (task of tasks; track $index) {
                 @if (task.status == '4') {
-                <div class="task-card">
+                    <div class="task-card" (click)="openTaskDetailModal(task.id)">
                     <div class="dFlex-SB">
                         <b>{{task.title}}</b>
-                        <div class="initials dFlex-C">
+                        <div class="initials">
                             {{task.project_lead.first_name[0]}}{{task.project_lead.last_name[0]}}
                         </div>
                     </div>

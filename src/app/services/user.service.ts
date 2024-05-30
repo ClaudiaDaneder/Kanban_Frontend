@@ -16,4 +16,9 @@ export class UserService {
     let url = this.baseURL + 'userlist/';
     return lastValueFrom(this.http.get(url))
   }
+
+  getUserData() {
+    let url = this.baseURL + 'profile/';
+    return lastValueFrom(this.http.get(url))
+  }
 }

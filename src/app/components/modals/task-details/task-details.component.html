@@ -1,14 +1,86 @@
-<div class="modal-header">
+<div *ngIf="task">
+  <div class="modal-header">
     <h4 class="modal-title">{{ task.title }}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     </button>
   </div>
   <div class="modal-body">
-    <p>{{ task.description }}</p>
-    <!-- Weitere Details hier anzeigen -->
+    <div *ngIf="!isEditMode">
+      <label>Description:</label>
+      <p>{{ task.description }}</p>
+
+      <label>Associated Project:</label>
+      <p>{{ getBoardTitle(task.board) }}</p>
+
+      <label>Assigned to:</label>
+      <p>{{ getUserName(task.project_lead) }}</p>
+
+      <label>Priority:</label>
+      <p>{{ getPriorityText(task.priority) }}</p>
+
+      <label>Status:</label>
+      <p>{{ getStatusText(task.status) }}</p>
+
+      <label>Deadline:</label>
+      <p>{{ task.deadline | date }}</p>
+
+    </div>
+    <form *ngIf="isEditMode">
+      <div class="form-row">
+        <label for="title">Title:</label>
+        <input type="text" [(ngModel)]="task.title" name="title">
+      </div>
+      <div class="form-row">
+        <label for="description">Description:</label>
+        <textarea [(ngModel)]="task.description" name="description"></textarea>
+      </div>
+      <div class="form-row">
+        <label for="board">Associated Project:</label>
+        <select [(ngModel)]="task.board" required name="board">
+          <option *ngFor="let board of boards" [value]="board.id">{{ board.title }}</option>
+        </select>
+      </div>
+
+
+      <div class="form-row">
+        <label for="project_lead">Assigned to:</label>
+        <select name="project_lead" [(ngModel)]="task.project_lead" required id="project_lead">
+          <option *ngFor="let user of users" [value]="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="priority">Priority:</label>
+        <select id="priority" [(ngModel)]="task.priority" name="priority" required>
+          <option value="1">Low</option>
+          <option value="2">Medium</option>
+          <option value="3">Urgent</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="status">Status:</label>
+        <select id="status" [(ngModel)]="task.status" name="status" required>
+          <option value="1">To Do</option>
+          <option value="2">Do Today</option>
+          <option value="3">In Progress</option>
+          <option value="4">Done</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="deadline">Deadline:</label>
+        <input id="deadline" [(ngModel)]="task.deadline" type="date" name="deadline" required>
+      </div>
+
+    </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-danger" >Löschen</button>
-    <button type="button" class="btn btn-primary">Bearbeiten</button>
+    <button *ngIf="isEditMode" type="button" class="btn btn-secondary"
+    (click)="toggleEditMode(); loadTaskDetails()">Cancel</button>
+    <button *ngIf="isEditMode" type="submit" class="btn btn-primary" (click)="updateTask()">Save</button>
+
+
+      <button *ngIf="!isEditMode" type="button" class="btn btn-primary" (click)="toggleEditMode()">Edit</button>
+    <button *ngIf="!isEditMode" type="button" class="btn btn-danger" (click)="deleteTask()">Delete</button>
   </div>
+</div>

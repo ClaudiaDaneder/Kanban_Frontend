@@ -15,6 +15,9 @@ import { CommonModule } from '@angular/common';
 })
 export class AddTaskToBoardComponent {
   activeModal = inject(NgbActiveModal);
+  private ts = inject(TaskService);
+  private us = inject(UserService);
+
   @Output() newTaskAdded = new EventEmitter<void>();
 
   boards: any = [];
@@ -31,7 +34,7 @@ export class AddTaskToBoardComponent {
   };
 
 
-  constructor(private ts: TaskService, private us: UserService) {
+  constructor() {
     this.loadBoardTitles();
     this.loadUsers();
   }
@@ -46,19 +49,19 @@ export class AddTaskToBoardComponent {
     }
   }
 
-  loadBoardTitles() {
-    this.ts.loadBoards().then(boards => {
-      this.boards = boards;
-    }).catch(error => {
+  async loadBoardTitles() {
+    try {
+      this.boards = await this.ts.loadBoards()
+    } catch(error) {
       console.error('Error loading boards', error);
-    });
+    };
   }
 
-  loadUsers() {
-    this.us.loadUsers().then(users => {
-      this.users = users;
-    }).catch(error => {
+  async loadUsers() {
+    try {
+      this.users = await this.us.loadUsers()
+    } catch(error) {
       console.error('Error loading users', error);
-    });
+    };
   }
 }

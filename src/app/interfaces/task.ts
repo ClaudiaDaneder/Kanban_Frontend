@@ -1,4 +1,4 @@
-import { Board } from "./board";
+
 
 export interface Task {
     id?: number;

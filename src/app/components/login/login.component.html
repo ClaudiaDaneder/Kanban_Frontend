@@ -1,10 +1,26 @@
-<section class="p-32-64">
+<section>
 
-<form (ngSubmit)="login()">
-    <input type="text" [(ngModel)]="username" name="username" required>
-    <input type="password" [(ngModel)]="password" name="password" required>
-    <button type="submit">Submit</button>
-</form>
+    <div class="login-section dFlex-C">
+        <ngb-toast *ngIf="loginFailed" type="warning" [delay]="5000"
+            class="bg-warning text-light toast-container position-fixed end-0 p-2" style="z-index: 1200">
+            <strong>Login failed!</strong> Please try again.
+        </ngb-toast>
 
-<p>No user yet? Register <a href="/register">here!</a></p>
+        <div class="login-container">
+            <form (ngSubmit)="login()">
+                <div class="form-row">
+                    <label for="username">Username</label>
+                    <input type="text" [(ngModel)]="username" name="username" required>
+                </div>
+                <div class="form-row">
+                    <label for="password">Password</label>
+                    <input type="password" [(ngModel)]="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+
+            <p class="register">Not a user yet? Register <a class="link" href="/register">here!</a></p>
+        </div>
+    </div>
+
 </section>

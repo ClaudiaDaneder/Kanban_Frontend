@@ -1,7 +1,76 @@
 <section class="p-32-64">
-    <h1>Dashboard</h1>
+    <div class="dFlex-SB">
+        <h1>Dashboard</h1>
 
-<button (click)="openCreateNewTaskModal()">Create new Task</button>
+        <div ngbDropdown class="d-inline-block">
+			<a class="add-btn dFlex-C">
+				<img src="assets/img/add.png" ngbDropdownToggle>
+            </a>
+			<div ngbDropdownMenu >
+				<button ngbDropdownItem (click)="openCreateNewBoardModal()">Create new Project</button>
+				<button ngbDropdownItem (click)="openCreateNewTaskModal()">Create new Task</button>
+			</div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="summary-container">
+            <div class="metrics-container">
+                <div class="tasks-in-board">
+                    <div class="metrics-bubble">
+                        <div>
+                            <div class="number"> {{ tasks.length }}</div>
+                            <div class="metric">Open Tasks</div>
+                        </div>
+                    </div>
 
-<button type="button"(click)="openCreateNewBoardModal()">Create new Board</button>
+                    <div class="metrics-bubble">
+                        <div>
+                            <div class="number"> {{ boards.length }}</div>
+                            <div class="metric">Projects</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="urgent">
+                    <div class="metrics-bubble">
+                        <div class="urgent">
+                            <div class="urgent-left">
+                                <div>
+                                    <div class="number">{{ getTaskCountByPriority(3)}}</div>
+                                    <div class="metric">Urgent</div>
+                                </div>
+                            </div>
+
+                            <div class="grey-line" id="urgent-line" *ngIf="nextDeadline"></div>
+                            <div class="urgent-right" id="urgent-right" *ngIf="nextDeadline">
+                                <div class="deadline" id="deadline">{{ nextDeadline.deadline | date: 'longDate' }}</div>
+                                Upcoming Deadline
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="to-dos">
+                    <div class="metrics-bubble">
+                        <div>
+                            <div class="number">{{ getTaskCountByStatus(1) }}</div>
+                            <div class="metric">To Do</div>
+                        </div>
+                    </div>
+
+                    <div class="metrics-bubble">
+                        <div>
+                            <div class="number">{{ getTaskCountByStatus(2) }}</div>
+                            <div class="metric">Do Today</div>
+                        </div>
+                    </div>
+                    <div class="metrics-bubble">
+                        <div>
+                            <div class="number">{{ getTaskCountByStatus(3) }}</div>
+                            <div class="metric">In Progress</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

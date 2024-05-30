@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { TaskService } from '../../../services/task.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
@@ -12,17 +12,18 @@ import { FormsModule } from '@angular/forms';
 })
 export class CreateBoardComponent {
   activeModal = inject(NgbActiveModal);
+  ts = inject(TaskService);
+  @Output() newBoardAdded = new EventEmitter<void>();
   title = '';
 
-
-  constructor(private ts: TaskService) {}
 
   async createNewBoard() {
     try {
       await this.ts.newBoard({
         title: this.title,
       });
-      console.log('Board created successfully!');
+      this.newBoardAdded.emit();
+      this.activeModal.close();
     } catch (e) {
       console.log('We have a problem', e)
     }

@@ -1,0 +1,13 @@
+.form-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    resize: none;
+}
+
+form {
+    gap: 16px
+}

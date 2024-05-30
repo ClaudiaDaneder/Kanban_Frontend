@@ -1,3 +1,147 @@
 section {
     max-width: 1440px;
+    background-color: #F6F7F8 !important;
+}
+
+.summary-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.metrics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 65%;
+}
+
+.metrics-bubble {
+    border-radius: 30px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex: 1;
+    padding: 12px;
+    transition: 100ms ease-in-out;
+    box-shadow: 0px 2px 4px 0px #00000040;
+}
+
+.metrics-bubble:hover {
+    background-color: darkblue;
+    color: #fff !important;
+    transform: scale(1.04);
+
+}
+
+.metrics-bubble:hover .number,
+.metrics-bubble:hover .metric,
+.metrics-bubble:hover .deadline,
+.metrics-bubble:hover .urgent-right {
+    color: #fff !important;
+}
+
+.number {
+    color: darkblue;
+    font-weight: 600;
+    font-size: 42px;
+    // margin-bottom: 6px;
+    text-align: center;
+}
+
+.metric {
+    font-size: 18px;
+    text-align: center;
+}
+
+.to-dos {
+    display: flex;
+    gap: 16px;
+}
+
+.urgent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 61px;
+}
+
+.urgent-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+}
+
+.grey-line {
+    width: 0;
+    height: 80px;
+    border: 1px solid #D1D1D1;
+}
+
+.urgent-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 18px;
+}
+
+.deadline {
+    font-size: 24px;
+    font-weight: 700;
+    color: darkblue;
+}
+
+.tasks-in-board {
+    display: flex;
+    gap: 32px;
+    width: 100%;
+}
+
+.main-container {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 20px
+}
+
+.add-btn {
+    background-color: darkblue;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    border: 2px solid #fff;
+
+    img {
+        width: 20px;
+        height: 20px
+    }
+}
+
+h1 {
+    position: relative;
+    margin-bottom: 20px;
+
+    &::after {
+        content: '';
+        border-bottom: 3px solid #ffc400;
+        width: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        animation: expandLine 0.3s ease-in-out forwards;
+        animation-delay: 0.3s; /* Zeitverzögerung vor der Animation */
+    }
+
+    @keyframes expandLine {
+        to {
+            width: 120px;
+        }
+    }
 }

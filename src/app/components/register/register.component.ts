@@ -1,18 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/user';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgbToastModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+  private auth = inject(AuthService);
+  private router = inject(Router);
   user: User = {
     username: '',
     password: '',
@@ -21,13 +24,18 @@ export class RegisterComponent {
     email: '',
   }
   confirm_password = '';
+  registrationFailed: boolean = false;
+  passwordNoMatch: boolean = false;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor() { }
 
 
   async registerUser() {
     if (this.user.password !== this.confirm_password) {
-      alert('Passwords do not match!');
+      this.passwordNoMatch = true;
+      setTimeout(() => {
+        this.passwordNoMatch = false;
+      }, 3000);
       return;
     }
 
@@ -36,7 +44,10 @@ export class RegisterComponent {
       console.log('User registration successful', response);
       this.router.navigateByUrl('login')
     } catch (e) {
-      console.log('Registration failed', e)
+      this.registrationFailed = true;
+      setTimeout(() => {
+        this.registrationFailed = false;
+      }, 3000);
     }
   }
 }

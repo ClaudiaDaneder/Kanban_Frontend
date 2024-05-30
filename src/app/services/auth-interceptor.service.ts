@@ -17,16 +17,16 @@ export class AuthInterceptorService implements HttpInterceptor {
         setHeaders: { 'Authorization': `Token ${token}` }
       })
     }
-
-      return next.handle(request).pipe(
-        catchError((err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status === 401) {
-              this.router.navigateByUrl('login');
-            }
+    
+    return next.handle(request).pipe(
+      catchError((err) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.router.navigateByUrl('login');
           }
-          return throwError(() => err)
-        })
-      )
+        }
+        return throwError(() => err)
+      })
+    )
   }
 }

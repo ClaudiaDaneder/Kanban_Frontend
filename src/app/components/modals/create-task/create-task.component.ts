@@ -1,5 +1,5 @@
 import { TaskService } from '../../../services/task.service';
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Task } from '../../../interfaces/task';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class CreateTaskComponent {
   activeModal = inject(NgbActiveModal);
+  ts = inject(TaskService);
+  us = inject(UserService);
+  @Output() newTaskAdded = new EventEmitter<void>();
   boards: any = [];
   users: any = [];
   task: Task = {
@@ -29,14 +32,16 @@ export class CreateTaskComponent {
   };
 
 
-constructor(private ts: TaskService, private us: UserService) {
+constructor() {
   this.loadBoardTitles();
   this.loadUsers();
 }
 
 async createTask() {
     try {
-      await this.ts.newTask(this.task)
+      await this.ts.newTask(this.task);
+      this.newTaskAdded.emit();
+      this.activeModal.close();
     } catch (e) {
       console.log('We have a problem', e)
     }

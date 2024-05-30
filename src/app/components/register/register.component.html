@@ -1,32 +1,51 @@
-<section class="p-32-64">
+<section>
+    <div class="register-section dFlex-C">
 
-    <form (ngSubmit)="registerUser()">
-        <div>
-            <label for="username">Username</label>
-            <input type="text" [(ngModel)]="user.username" name="username" required>
-        </div>
-        <div>
-            <label for="first_name">First Name</label>
-            <input type="text" [(ngModel)]="user.first_name" name="first_name" required>
-        </div>
-        <div>
-            <label for="last_name">Last Name</label>
-            <input type="text" [(ngModel)]="user.last_name" name="last_name" required>
-        </div>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" [(ngModel)]="user.email" name="email" required>
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" [(ngModel)]="user.password" name="password" required>
-        </div>
+        <div class="register-container">
+            <h5>Create a user</h5>
+            <form>
+                <div class="left">
+                    <div class="form-row">
+                        <label for="username">Username</label>
+                        <input type="text" [(ngModel)]="user.username" name="username" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="first_name">First Name</label>
+                        <input type="text" [(ngModel)]="user.first_name" name="first_name" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" [(ngModel)]="user.last_name" name="last_name" required>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="form-row">
+                        <label for="email">Email</label>
+                        <input type="email" [(ngModel)]="user.email" name="email" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="password">Password</label>
+                        <input type="password" [(ngModel)]="user.password" name="password" required>
+                    </div>
 
-        <div>
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" [(ngModel)]="confirm_password" name="confirmPassword" required>
-          </div>
-        <button type="submit">Register</button>
-    </form>
+                    <div class="form-row">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" [(ngModel)]="confirm_password" name="confirmPassword" required>
+                    </div>
+                </div>
+            </form>
+                <button type="submit" (click)="registerUser()" class="btn btn-primary">Register</button>
 
+        </div>
+    </div>
+
+    <ngb-toast *ngIf="registrationFailed" type="warning" [delay]="5000"
+            class="bg-warning text-light toast-container position-fixed end-0 p-2" style="z-index: 1200">
+            <strong>Registration failed!</strong> Please try again.
+        </ngb-toast>
+
+        <ngb-toast *ngIf="passwordNoMatch" type="warning" [delay]="5000"
+            class="bg-warning text-light toast-container position-fixed end-0 p-2" style="z-index: 1200">
+            Passwords don't match. Please try again
+        </ngb-toast>
 </section>

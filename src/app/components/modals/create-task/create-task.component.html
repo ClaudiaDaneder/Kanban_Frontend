@@ -3,61 +3,64 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 </div>
 <div class="modal-body">
-    <div class="task-create">
-        <form #createTaskForm="ngForm">
-            <div>
-                <label for="title">Title</label>
-                <input id="title" [(ngModel)]="task.title" type="text" required>
-            </div>
 
-            <div>
-                <label for="description">Description</label>
-                <textarea id="description" [(ngModel)]="task.description" required></textarea>
-            </div>
+    <form #createTaskForm="ngForm">
+        <div class="left">
+        <div class="form-row">
+            <label for="title">Title:</label>
+            <input [(ngModel)]="task.title" type="text" name="title" required>
+        </div>
 
-            <div>
-                <label for="board">Board</label>
-                <select id="board" [(ngModel)]="task.board" required>
-                    <option *ngFor="let board of boards" [value]="board.id">{{ board.title }}</option>
-                </select>
-            </div>
+        <div class="form-row">
+            <label for="description">Description:</label>
+            <textarea [(ngModel)]="task.description" name="description" required ></textarea>
+        </div>
 
-            <div>
-                <label for="users">Assigned to</label>
-                <select id="users" [(ngModel)]="task.project_lead" required>
+        <div class="form-row">
+            <label for="board">Associated Project:</label>
+            <select [(ngModel)]="task.board" required name="board">
+                <option *ngFor="let board of boards" [value]="board.id">{{ board.title }}</option>
+            </select>
+        </div>
+
+
+        </div>
+        <div class="right">
+
+            <div class="form-row">
+                <label for="project_lead">Assigned to:</label>
+                <select [(ngModel)]="task.project_lead" name="project_lead" required>
                     <option *ngFor="let user of users" [value]="user.id">{{ user.first_name }} {{ user.last_name }}
                     </option>
                 </select>
             </div>
+            <div class="form-row">
+            <label for="status">Status:</label>
+            <select [(ngModel)]="task.status" name="status" required>
+                <option value="1">To Do</option>
+                <option value="2">Do Today</option>
+                <option value="3">In Progress</option>
+            </select>
+        </div>
 
-            <div>
-                <label for="status">Status</label>
-                <select id="status" [(ngModel)]="task.status" required>
-                    <option value="1">To Do</option>
-                    <option value="2">Do Today</option>
-                    <option value="3">In Progress</option>
-                    <option value="4">Done</option>
-                </select>
-            </div>
+        <div class="form-row">
+            <label for="priority">Priority:</label>
+            <select [(ngModel)]="task.priority" name="priority" required>
+                <option value="1">Low</option>
+                <option value="2">Medium</option>
+                <option value="3">Urgent</option>
+            </select>
+        </div>
 
-            <div>
-                <label for="priority">Priority</label>
-                <select id="priority" [(ngModel)]="task.priority" required>
-                    <option value="1">Low</option>
-                    <option value="2">Medium</option>
-                    <option value="3">Urgent</option>
-                </select>
-            </div>
+        <div class="form-row">
+            <label for="deadline">Deadline:</label>
+            <input [(ngModel)]="task.deadline" type="date" name="deadline" required>
+        </div>
+        </div>
 
-            <div>
-                <label for="deadline">Deadline</label>
-                <input id="deadline" [(ngModel)]="task.deadline" type="date" required>
-            </div>
-
-            <button type="submit" (click)="createTask(); createTaskForm.reset()">Create Task</button>
-        </form>
-    </div>
+    </form>
 </div>
+
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    <button type="submit" class="btn btn-primary" (click)="createTask()">Create Task</button>
 </div>

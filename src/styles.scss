@@ -1,14 +1,53 @@
 @import 'variables.scss';
 
 * {
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Exo 2', sans-serif;
-    font-size: 18px;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 16px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0 !important;
 }
 
 a {
   text-decoration: none !important;
+}
+
+label {
+  font-size: 14px;
+  color: rgba(76, 72, 94, 0.778);
+}
+
+input,
+textarea,
+select,
+option {
+  border-radius: 6px;
+  padding: 6px 12px;
+  outline: none;
+  border: 1px solid rgba(76, 72, 94, 0.778) !important;
+  font-size: 15px !important;
+  color: #000 !important;
+}
+
+.btn-primary {
+  background-color: darkblue !important;
+  border: none !important;
+
+  &:hover {
+    background-color: rgb(60, 60, 186) !important;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: darkblue !important;
 }
 
 
@@ -22,49 +61,66 @@ a:hover {
 /*FONTS*/
 /* exo-2-regular - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Exo 2';
-    font-style: normal;
-    font-weight: 400;
-    src: url('/assets/fonts/exo-2-v21-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* exo-2-500 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Exo 2';
-    font-style: normal;
-    font-weight: 500;
-    src: url('/assets/fonts/exo-2-v21-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* exo-2-600 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Exo 2';
-    font-style: normal;
-    font-weight: 600;
-    src: url('/assets/fonts/exo-2-v21-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* exo-2-700 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Exo 2';
-    font-style: normal;
-    font-weight: 700;
-    src: url('/assets/fonts/exo-2-v21-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* exo-2-800 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Exo 2';
-    font-style: normal;
-    font-weight: 800;
-    src: url('/assets/fonts/exo-2-v21-latin-800.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* exo-2-900 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Exo 2';
-    font-style: normal;
-    font-weight: 900;
-    src: url('/assets/fonts/exo-2-v21-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/fonts/exo-2-v21-latin-regular.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* exo-2-500 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/assets/fonts/exo-2-v21-latin-500.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* exo-2-600 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/assets/fonts/exo-2-v21-latin-600.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* exo-2-700 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/assets/fonts/exo-2-v21-latin-700.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* exo-2-800 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 800;
+  src: url('/assets/fonts/exo-2-v21-latin-800.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* exo-2-900 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 900;
+  src: url('/assets/fonts/exo-2-v21-latin-900.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
